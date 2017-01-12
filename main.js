@@ -2,13 +2,28 @@
  * @jsx React.DOM
  */
 
+var prizetable = [
+	{ symbol: ['B7', 'B7', 'DJ'], hits: 4, pay: 5000 },
+	{ symbol: ['3B', '3B', '3B'], hits: 108, pay: 120 }
+]
+
+var possible = 72*72*72;
+
+var PayTable = React.createClass({
+	render: function() {
+		var items = this.props.prizetable.map( function(pt) {
+			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td>
+		})
+		return <table>{items}</table>
+	},
+})
+
 function c2f(c) {
 	return 9 / 5 * parseFloat(c) + 32;
 }
 function f2c(f) {
 	return 5 / 9 * (f - 32);
 }
-
 
 var TemperatureConverter = React.createClass({
 	getInitialState: function() {
@@ -37,6 +52,6 @@ var TemperatureConverter = React.createClass({
 });
 
 React.renderComponent(
-	<TemperatureConverter/>,
+	<PayTable prizetable={prizetable}/>,
 	document.body
 );
