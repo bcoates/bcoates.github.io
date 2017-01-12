@@ -4,8 +4,12 @@
 
 var PayTable = React.createClass({
 	render: function() {
-		var items = this.props.prizetable.map( function(pt) {
-			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td></tr>
+		var items = this.props.prizetable.map( function(pt,i) {
+			return <tr key={i}>
+				<td>{pt.symbol.join('-')}</td>
+				<td>{pt.hits}</td>
+				<td><input type="number" value={pt.pay}/></td>
+			</tr>
 		});
 		return <table><tr><th>symbols</th><th>hits</th><th>pays</th></tr>{items}</table>
 	}
