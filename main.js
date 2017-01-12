@@ -7,16 +7,16 @@ var prizetable = [
 	{ symbol: ['3B', '3B', '3B'], hits: 108, pay: 120 }
 ]
 
-var possible = 72*72*72;
+var possible = 72*72*72
 
 var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( function(pt) {
-			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td>;
+			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td></tr>
 		});
-		return <table>{items}</table>;
+		return <table>{items}</table>
 	}
-});
+})
 
 var TemperatureConverter = React.createClass({
 	getInitialState: function() {
