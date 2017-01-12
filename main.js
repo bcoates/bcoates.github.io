@@ -2,10 +2,7 @@
  * @jsx React.DOM
  */
 
-var prizetable = [
-	{ symbol: ['B7', 'B7', 'DJ'], hits: 4, pay: 5000 },
-	{ symbol: ['3B', '3B', '3B'], hits: 108, pay: 120 }
-]
+var prizetable = 
 
 var possible = 72*72*72
 
@@ -15,6 +12,18 @@ var PayTable = React.createClass({
 			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td></tr>
 		});
 		return <table><tr><th>symbols</th><th>hits</th><th>pays</th></tr>{items}</table>
+	}
+})
+		
+var Ruin = React.createClass({
+	getInitialState: function() {
+		return {prizetable: [
+			{ symbol: ['B7', 'B7', 'DJ'], hits: 4, pay: 5000 },
+			{ symbol: ['3B', '3B', '3B'], hits: 108, pay: 120 }],
+			possible: 72*72*72 }
+	},
+	render: function() {
+		return <PayTable prizetable={this.state.prizetable}/>
 	}
 })
 
@@ -45,6 +54,6 @@ var TemperatureConverter = React.createClass({
 });
 
 React.renderComponent(
-	<PayTable prizetable={prizetable}/>,
+	<Ruin/>,
 	document.body
 );
