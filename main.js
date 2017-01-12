@@ -15,7 +15,7 @@ var PayTable = React.createClass({
 			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td>
 		})
 		return <table>{items}</table>
-	},
+	}
 })
 
 function c2f(c) {
