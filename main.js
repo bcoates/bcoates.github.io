@@ -2,10 +2,6 @@
  * @jsx React.DOM
  */
 
-var prizetable = 
-
-var possible = 72*72*72
-
 var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( function(pt) {
