@@ -14,7 +14,7 @@ var PayTable = React.createClass({
 		var items = this.props.prizetable.map( function(pt) {
 			return <tr><td>{pt.symbol.join('-')}</td><td>{pt.hits}</td><td>{pt.pay}</td></tr>
 		});
-		return <table><th><td>symbols</td><td>hits</td><td>pays</td></th>{items}</table>
+		return <table><tr><th>symbols</th><th>hits</th><th>pays</th></tr>{items}</table>
 	}
 })
 
