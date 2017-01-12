@@ -5,10 +5,13 @@
 var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( function(pt,i) {
+			var changePay = (event) => {
+				this.props.onPayChange(i, event.target.value)
+			}
 			return <tr key={i}>
 				<td>{pt.symbol.join('-')}</td>
 				<td>{pt.hits}</td>
-				<td><input type="number" value={pt.pay}/></td>
+				<td><input type="number" value={pt.pay} onChange={changePay}/></td>
 			</tr>
 		});
 		return <table><tr><th>symbols</th><th>hits</th><th>pays</th></tr>{items}</table>
@@ -23,7 +26,10 @@ var Ruin = React.createClass({
 			possible: 72*72*72 }
 	},
 	render: function() {
-		return <PayTable prizetable={this.state.prizetable}/>
+		return <PayTable prizetable={this.state.prizetable} onPayChange={this.handlePayChange}/>
+	},
+	handlePayChange: function(idx, newval) {
+		
 	}
 })
 
