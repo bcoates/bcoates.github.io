@@ -28,7 +28,7 @@ var Return = React.createClass({
 	}
 })
 
-function ∏(array, f = x => x) {
+function Π(array, f = x => x) {
 	return array.reduce( (mul, cur) => mul * f(cur), 1)
 }
 			    
@@ -37,7 +37,7 @@ function Σ(array, f = x => x) {
 }
 
 function possible(reels) {
-	return ∏(reels, r => Σ(r, s => s.n))
+	return Π(reels, r => Σ(r, s => s.n))
 }
 
 var Ruin = React.createClass({
