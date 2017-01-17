@@ -4,7 +4,7 @@
 
 var PayTable = React.createClass({
 	render: function() {
-		var items = this.props.prizetable.map( function(pt,i) {
+		var items = this.props.prizetable.map( (pt,i) => {
 			var changePay = (event) => {
 				this.props.onPayChange(i, event.target.value)
 			}
