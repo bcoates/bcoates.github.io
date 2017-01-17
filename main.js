@@ -54,7 +54,7 @@ var Ruin = React.createClass({
 	render: function() {
 		return <div>
 			<PayTable prizetable={this.state.prizetable} onPayChange={this.handlePayChange}/>
-			<Return prizetable={this.state.prizetable} possible={this.state.possible}/>
+			<Return prizetable={this.state.prizetable} reels={this.state.reels}/>
 		</div>
 	},
 	handlePayChange: function(idx, newval) {
