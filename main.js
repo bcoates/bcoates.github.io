@@ -22,11 +22,23 @@ var Return = React.createClass({
 	render: function() {
 		ret = (this.props.prizetable.reduce( (acc, cur) => {
 			return acc + cur.pay * cur.hits
-		}, 0) * 100 / this.props.possible).toFixed(2)
+		}, 0) * 100 / possible(this.props.reels)).toFixed(2)
 		
 		return <div>Player Return: {ret}%</div>
 	}
 })
+
+function ∏(array, f = x => x) {
+	return array.reduce( (mul, cur) => mul * f(cur), 1)
+}
+			    
+function Σ(array, f = x => x) {
+	return array.reduce( (acc, cur) => acc * f(cur), 0)
+}
+
+function possible(reels) {
+	return ∏(reels, r => Σ(r, s => s.n))
+}
 
 var Ruin = React.createClass({
 	getInitialState: function() {
