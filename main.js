@@ -20,9 +20,9 @@ var PayTable = React.createClass({
 
 var Return = React.createClass({
 	render: function() {
-		ret = this.props.prizetable.reduce( (acc, cur) => {
+		ret = Math.toFixed(this.props.prizetable.reduce( (acc, cur) => {
 			return acc + cur.pay * cur.hits
-		}, 0) / this.props.possible
+		}, 0) * 100 / this.props.possible, 2)
 		
 		return <div>Player Return: {ret}</div>
 	}
