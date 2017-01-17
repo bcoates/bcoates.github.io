@@ -17,7 +17,17 @@ var PayTable = React.createClass({
 		return <table><tr><th>symbols</th><th>hits</th><th>pays</th></tr>{items}</table>
 	}
 })
+
+var Return = React.createClass({
+	render: function() {
+		ret = this.props.prizetable.reduce( (acc, cur) => {
+			return acc + cur.pay * cur.hits
+		}, 0) / this.props.possible
 		
+		return <div>Player Return: {ret}</div>
+	}
+})
+
 var Ruin = React.createClass({
 	getInitialState: function() {
 		return {prizetable: [
@@ -26,7 +36,10 @@ var Ruin = React.createClass({
 			possible: 72*72*72 }
 	},
 	render: function() {
-		return <PayTable prizetable={this.state.prizetable} onPayChange={this.handlePayChange}/>
+		return <div>
+			<PayTable prizetable={this.state.prizetable} onPayChange={this.handlePayChange}/>
+			<Return prizetable={this.state.prizetable} possible={this.state.possible}/>
+		</div>
 	},
 	handlePayChange: function(idx, newval) {
 		this.state.prizetable[idx].pay = newval
