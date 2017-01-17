@@ -24,7 +24,7 @@ var Return = React.createClass({
 			return acc + cur.pay * cur.hits
 		}, 0) * 100 / this.props.possible).toFixed(2)
 		
-		return <div>Player Return: {ret}</div>
+		return <div>Player Return: {ret}%</div>
 	}
 })
 
@@ -33,6 +33,10 @@ var Ruin = React.createClass({
 		return {prizetable: [
 			{ symbol: ['B7', 'B7', 'DJ'], hits: 4, pay: 5000 },
 			{ symbol: ['3B', '3B', '3B'], hits: 108, pay: 120 }],
+			reels: [ [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
+				 [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
+				 [ {sym:'DJ', n: 1}, {sym:'3B', n: 3}, {sym: 'BL', n: 67} ]
+			],
 			possible: 72*72*72 }
 	},
 	render: function() {
