@@ -29,7 +29,8 @@ var Ruin = React.createClass({
 		return <PayTable prizetable={this.state.prizetable} onPayChange={this.handlePayChange}/>
 	},
 	handlePayChange: function(idx, newval) {
-		
+		this.state.prizetable[idx].pay = newval
+		this.forceUpdate()
 	}
 })
 
