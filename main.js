@@ -43,6 +43,25 @@ var PayTable = React.createClass({
 	}
 })
 
+var SaveBox = React.createClass({
+	getInitialState: function() {
+		return {txt: JSON.stringify(this.props.st)}
+	},
+	overwrite: function(newst) {
+		this.setState({txt: JSON.stringify(newst)})
+	}
+	render: function() {
+		var change = event => {
+			this.setState({txt: event.target.value})
+			try {
+				this.props.onChange(JSON.parse(event.target.value))
+			} catch (e) {
+			}
+		}
+		return ce('textarea', {value: this.state.txt, onChange: change})
+	}
+})
+
 var Return = React.createClass({
 	render: function() {
 		ret = (this.props.prizetable.reduce( (acc, cur) => {
@@ -61,14 +80,18 @@ var Ruin = React.createClass({
 			reels: [ [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
 				 [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
 				 [ {sym:'DJ', n: 1}, {sym:'3B', n: 3}, {sym: 'BL', n: 67} ]
-			],
-			possible: 72*72*72 }
+			] }
 	},
 	render: function() {
 		return ce('div', {}, [
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
+			ce(SaveBox, {key: 3, st: this.state, onChange: this.handleState})
 		])
+	},
+	handleState: function(newstate) {
+		this.state = newstate
+		this.forceUpdate()
 	},
 	handlePayChange: function(idx, newval) {
 		this.state.prizetable[idx].pay = newval
