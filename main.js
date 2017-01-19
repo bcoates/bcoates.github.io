@@ -2,19 +2,28 @@
  * @jsx React.DOM
  */
 
+var ce = React.createElement
+
 var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( (pt,i) => {
 			var changePay = (event) => {
 				this.props.onPayChange(i, event.target.value)
 			}
-			return <tr key={i}>
-				<td>{pt.symbol.join('-')}</td>
-				<td>{pt.hits}</td>
-				<td><input type="number" value={pt.pay} onChange={changePay}/></td>
-			</tr>
+			return ce('tr', {key: i}, [
+				ce('td', {}, pt.symbol.join('-')),
+				ce('td', {}, pt.hits),
+				ce('td', {}, ce('input', {type:'number', value:'pt.pay', onChange:'changePay'}))
+			])
 		});
-		return <table><tr><th>symbols</th><th>hits</th><th>pays</th></tr>{items}</table>
+		return ce('table', {}, [
+			ce('tr', {}, [
+				ce('th', {}, 'symbols'),
+				ce('th', {}, 'hits'),
+				ce('th', {}, 'pays'),
+			]),
+			items
+		])
 	}
 })
 
@@ -24,7 +33,7 @@ var Return = React.createClass({
 			return acc + cur.pay * cur.hits
 		}, 0) * 100 / possible(this.props.reels)).toFixed(2)
 		
-		return <div>Player Return: {ret}%</div>
+		return ce('div', {}, ['Player Return: ', 'ret', '%'])
 	}
 })
 
@@ -52,10 +61,10 @@ var Ruin = React.createClass({
 			possible: 72*72*72 }
 	},
 	render: function() {
-		return <div>
-			<PayTable prizetable={this.state.prizetable} onPayChange={this.handlePayChange}/>
-			<Return prizetable={this.state.prizetable} reels={this.state.reels}/>
-		</div>
+		return ce('div', {}, [
+			ce(PayTable, {prizetable: this.state.prizetable, onPayChange: this.handlePayChange}),
+			ce(Return, {prizetable: this.state.prizetable, reels: this.state.reels}),
+		])
 	},
 	handlePayChange: function(idx, newval) {
 		this.state.prizetable[idx].pay = newval
@@ -90,6 +99,6 @@ var TemperatureConverter = React.createClass({
 });
 
 React.renderComponent(
-	<Ruin/>,
+	ce(Ruin),
 	document.body
 );
