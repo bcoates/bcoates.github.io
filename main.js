@@ -4,6 +4,22 @@
 
 var ce = React.createElement
 
+function Π(array, f = x => x) {
+	return array.reduce( (mul, cur, idx) => mul * f(cur, idx), 1)
+}
+			    
+function Σ(array, f = x => x) {
+	return array.reduce( (acc, cur, idx) => acc + f(cur, idx), 0)
+}
+
+function possible(reels, pred = (reelidx, sym) => true ) {
+	return Π(reels, (r, reelidx) => Σ(r, s => pred(reelidx, s.sym) ? s.n : 0))
+}
+
+function winners(reels, symbols) {
+	return possible(reels, (reelidx, sym) => symbols[reelidx] == sym)
+}
+
 var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( (pt,i) => {
@@ -12,7 +28,7 @@ var PayTable = React.createClass({
 			}
 			return ce('tr', {key: i}, [
 				ce('td', {key:1}, pt.symbol.join('-')),
-				ce('td', {key:2}, pt.hits),
+				ce('td', {key:2}, winners(this.state.reels, pt.symbol),
 				ce('td', {key:3}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
@@ -37,18 +53,6 @@ var Return = React.createClass({
 	}
 })
 
-function Π(array, f = x => x) {
-	return array.reduce( (mul, cur) => mul * f(cur), 1)
-}
-			    
-function Σ(array, f = x => x) {
-	return array.reduce( (acc, cur) => acc + f(cur), 0)
-}
-
-function possible(reels) {
-	return Π(reels, r => Σ(r, s => s.n))
-}
-
 var Ruin = React.createClass({
 	getInitialState: function() {
 		return {prizetable: [
@@ -62,7 +66,7 @@ var Ruin = React.createClass({
 	},
 	render: function() {
 		return ce('div', {}, [
-			ce(PayTable, {key: 1, prizetable: this.state.prizetable, onPayChange: this.handlePayChange}),
+			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 		])
 	},
