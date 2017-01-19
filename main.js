@@ -45,7 +45,7 @@ var PayTable = React.createClass({
 
 var SaveBox = React.createClass({
 	getInitialState: function() {
-		return {txt: JSON.stringify(this.props.st)}
+		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels})}
 	},
 	render: function() {
 		var change = event => {
@@ -83,7 +83,7 @@ var Ruin = React.createClass({
 		return ce('div', {}, [
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
-			ce(SaveBox, {key: 3, st: this.state, onChange: this.handleState})
+			ce(SaveBox, {key: 3, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
 	},
 	handleState: function(newstate) {
