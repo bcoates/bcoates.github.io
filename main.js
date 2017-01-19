@@ -13,15 +13,15 @@ var PayTable = React.createClass({
 			return ce('tr', {key: i}, [
 				ce('td', {key:1}, pt.symbol.join('-')),
 				ce('td', {key:2}, pt.hits),
-				ce('td', {key:3}, ce('input', {type:'number', value:'pt.pay', onChange:changePay}))
+				ce('td', {key:3}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
 		return ce('table', {}, [
-			ce('tr', {key: 1}, [
+			ce('thead', {key:1}, ce('tr', {}, [
 				ce('th', {key:1}, 'symbols'),
 				ce('th', {key:2}, 'hits'),
 				ce('th', {key:3}, 'pays'),
-			]),
+			])),
 			ce('tbody', {key: 2}, items)
 		])
 	}
@@ -62,8 +62,8 @@ var Ruin = React.createClass({
 	},
 	render: function() {
 		return ce('div', {}, [
-			ce(PayTable, {prizetable: this.state.prizetable, onPayChange: this.handlePayChange}),
-			ce(Return, {prizetable: this.state.prizetable, reels: this.state.reels}),
+			ce(PayTable, {key: 1, prizetable: this.state.prizetable, onPayChange: this.handlePayChange}),
+			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 		])
 	},
 	handlePayChange: function(idx, newval) {
