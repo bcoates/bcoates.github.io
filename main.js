@@ -42,7 +42,7 @@ function Π(array, f = x => x) {
 }
 			    
 function Σ(array, f = x => x) {
-	return array.reduce( (acc, cur) => acc * f(cur), 0)
+	return array.reduce( (acc, cur) => acc + f(cur), 0)
 }
 
 function possible(reels) {
