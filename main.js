@@ -28,7 +28,7 @@ var PayTable = React.createClass({
 			}
 			return ce('tr', {key: i}, [
 				ce('td', {key:1}, pt.symbol.join('-')),
-				ce('td', {key:2}, winners(this.state.reels, pt.symbol)),
+				ce('td', {key:2}, winners(this.props.reels, pt.symbol)),
 				ce('td', {key:3}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
