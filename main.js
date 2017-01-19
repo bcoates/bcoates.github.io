@@ -72,32 +72,6 @@ var Ruin = React.createClass({
 	}
 })
 
-var TemperatureConverter = React.createClass({
-	getInitialState: function() {
-		return {c: 0}
-	},
-	render: function() {
-		var celciusValueLink = {
-			value: this.state.c.toString(),
-			requestChange: this.onCelsiusChange
-		};
-		var fahrenheitValueLink = {
-			value: c2f(this.state.c).toString(),
-			requestChange: this.onFahrenheitChange
-		};
-		return <div>
-			<input type="number" valueLink={celciusValueLink}/>℃ ⟷
-			<input type="number" valueLink={fahrenheitValueLink}/>℉
-		</div>
-	},
-	onCelsiusChange: function(data) {
-		this.setState({c: parseFloat(data)})
-	},
-	onFahrenheitChange: function(data) {
-		this.setState({c: f2c(data)})
-	}
-});
-
 React.renderComponent(
 	ce(Ruin),
 	document.body
