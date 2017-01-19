@@ -13,7 +13,7 @@ var PayTable = React.createClass({
 			return ce('tr', {key: i}, [
 				ce('td', {key:1}, pt.symbol.join('-')),
 				ce('td', {key:2}, pt.hits),
-				ce('td', {key:3}, ce('input', {type:'number', value:'pt.pay', onChange:changePay/}))
+				ce('td', {key:3}, ce('input', {type:'number', value:'pt.pay', onChange:changePay}))
 			])
 		});
 		return ce('table', {}, [
