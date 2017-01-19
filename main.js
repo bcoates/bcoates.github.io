@@ -46,7 +46,7 @@ var PayTable = React.createClass({
 var Return = React.createClass({
 	render: function() {
 		ret = (this.props.prizetable.reduce( (acc, cur) => {
-			return acc + cur.pay * cur.hits
+			return acc + cur.pay * winners(this.props.reels, cur.symbol)
 		}, 0) * 100 / possible(this.props.reels)).toFixed(2)
 		
 		return ce('div', {}, ['Player Return: ', ret, '%'])
@@ -56,8 +56,8 @@ var Return = React.createClass({
 var Ruin = React.createClass({
 	getInitialState: function() {
 		return {prizetable: [
-			{ symbol: ['B7', 'B7', 'DJ'], hits: 4, pay: 5000 },
-			{ symbol: ['3B', '3B', '3B'], hits: 108, pay: 120 }],
+			{ symbol: ['B7', 'B7', 'DJ'], pay: 5000 },
+			{ symbol: ['3B', '3B', '3B'], pay: 120 }],
 			reels: [ [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
 				 [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
 				 [ {sym:'DJ', n: 1}, {sym:'3B', n: 3}, {sym: 'BL', n: 67} ]
