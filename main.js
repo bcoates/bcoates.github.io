@@ -33,7 +33,7 @@ var Return = React.createClass({
 			return acc + cur.pay * cur.hits
 		}, 0) * 100 / possible(this.props.reels)).toFixed(2)
 		
-		return ce('div', {}, ['Player Return: ', 'ret', '%'])
+		return ce('div', {}, ['Player Return: ', ret, '%'])
 	}
 })
 
