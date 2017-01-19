@@ -72,7 +72,7 @@ var Ruin = React.createClass({
 	}
 })
 
-React.renderComponent(
+ReactDOM.render(
 	ce(Ruin),
 	document.body
 );
