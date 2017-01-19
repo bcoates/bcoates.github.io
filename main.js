@@ -45,10 +45,10 @@ var PayTable = React.createClass({
 
 var SaveBox = React.createClass({
 	getInitialState: function() {
-		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels})}
+		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels}, 2)}
 	},
 	componentWillReceiveProps: function(nextProps) {
-		this.setState({txt: JSON.stringify({prizetable: nextProps.prizetable, reels: nextProps.reels})})
+		this.setState({txt: JSON.stringify({prizetable: nextProps.prizetable, reels: nextProps.reels}, 2)})
 	},
 	render: function() {
 		var change = event => {
@@ -58,7 +58,7 @@ var SaveBox = React.createClass({
 			} catch (e) {
 			}
 		}
-		return ce('textarea', {value: this.state.txt, onChange: change})
+		return ce('textarea', {value: this.state.txt, onChange: change, width: '20em', height: '8em'})
 	}
 })
 
