@@ -11,18 +11,18 @@ var PayTable = React.createClass({
 				this.props.onPayChange(i, event.target.value)
 			}
 			return ce('tr', {key: i}, [
-				ce('td', {}, pt.symbol.join('-')),
-				ce('td', {}, pt.hits),
-				ce('td', {}, ce('input', {type:'number', value:'pt.pay', onChange:'changePay'}))
+				ce('td', {key:1}, pt.symbol.join('-')),
+				ce('td', {key:2}, pt.hits),
+				ce('td', {key:3}, ce('input', {type:'number', value:'pt.pay', onChange:changePay/}))
 			])
 		});
 		return ce('table', {}, [
-			ce('tr', {}, [
-				ce('th', {}, 'symbols'),
-				ce('th', {}, 'hits'),
-				ce('th', {}, 'pays'),
+			ce('tr', {key: 1}, [
+				ce('th', {key:1}, 'symbols'),
+				ce('th', {key:2}, 'hits'),
+				ce('th', {key:3}, 'pays'),
 			]),
-			items
+			ce('tbody', {key: 2}, items)
 		])
 	}
 })
