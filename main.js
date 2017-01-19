@@ -48,7 +48,7 @@ var SaveBox = React.createClass({
 		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels})}
 	},
 	componentWillReceiveProps: function(nextProps) {
-		this.setState({txt: JSON.stringify({prizetable: nextProps.prizetable, reels: nextProps.reels})}
+		this.setState({txt: JSON.stringify({prizetable: nextProps.prizetable, reels: nextProps.reels})})
 	},
 	render: function() {
 		var change = event => {
