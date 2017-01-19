@@ -47,9 +47,6 @@ var SaveBox = React.createClass({
 	getInitialState: function() {
 		return {txt: JSON.stringify(this.props.st)}
 	},
-	overwrite: function(newst) {
-		this.setState({txt: JSON.stringify(newst)})
-	}
 	render: function() {
 		var change = event => {
 			this.setState({txt: event.target.value})
