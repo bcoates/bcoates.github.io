@@ -30,10 +30,10 @@ var PayTable = React.createClass({
 				this.props.onRemovePay(i)
 			}
 			var reels = pt.symbol.map( (reel, i) => {
-				return ce('select', {id: i, value: reel}, [
-					ce('option', {id: 1, value: 'B7'}, 'B7'),
-					ce('option', {id: 2, value: '3B'}, '3B'),
-					ce('option', {id: 3, value: 'DJ'}, 'DJ')
+				return ce('select', {key: i, value: reel}, [
+					ce('option', {key: 1, value: 'B7'}, 'B7'),
+					ce('option', {key: 2, value: '3B'}, '3B'),
+					ce('option', {key: 3, value: 'DJ'}, 'DJ')
 				]);
 			});
 			return ce('tr', {key: i}, [
