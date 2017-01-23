@@ -30,7 +30,7 @@ var PayTable = React.createClass({
 				this.props.removePay(i)
 			}
 			return ce('tr', {key: i}, [
-				ce('td', {key:1, onclick={remove}}, '[-]'),
+				ce('td', {key:1, onclick: remove}, '[-]'),
 				ce('td', {key:2}, pt.symbol.join('-')),
 				ce('td', {key:3}, winners(this.props.reels, pt.symbol)),
 				ce('td', {key:4}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
@@ -92,7 +92,7 @@ var Ruin = React.createClass({
 	},
 	render: function() {
 		return ce('div', {}, [
-			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange}),
+			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 			ce(SaveBox, {key: 3, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
