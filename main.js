@@ -44,7 +44,7 @@ var PayTable = React.createClass({
 				ce('th', {key:4}, 'pays'),
 			])),
 			ce('tbody', {key: 2}, items),
-			ce('tfoot', {key: 3}, ce('tr', {} [
+			ce('tfoot', {key: 3}, ce('tr', {}, [
 				ce('td', {key:1}, '[+]')
 			]))
 		])
