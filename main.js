@@ -23,22 +23,30 @@ function winners(reels, symbols) {
 var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( (pt,i) => {
-			var changePay = (event) => {
+			var changePay = event => {
 				this.props.onPayChange(i, event.target.value)
 			}
+			var remove = event => {
+				this.props.removePay(i)
+			}
 			return ce('tr', {key: i}, [
-				ce('td', {key:1}, pt.symbol.join('-')),
-				ce('td', {key:2}, winners(this.props.reels, pt.symbol)),
-				ce('td', {key:3}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
+				ce('td', {key:1, onclick={remove}}, '[-]'),
+				ce('td', {key:2}, pt.symbol.join('-')),
+				ce('td', {key:3}, winners(this.props.reels, pt.symbol)),
+				ce('td', {key:4}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
 		return ce('table', {}, [
 			ce('thead', {key:1}, ce('tr', {}, [
-				ce('th', {key:1}, 'symbols'),
-				ce('th', {key:2}, 'hits'),
-				ce('th', {key:3}, 'pays'),
+				ce('th', {key:1}, ' ')
+				ce('th', {key:2}, 'symbols'),
+				ce('th', {key:3}, 'hits'),
+				ce('th', {key:4}, 'pays'),
 			])),
-			ce('tbody', {key: 2}, items)
+			ce('tbody', {key: 2}, items),
+			ce('tfoot', {key: 3}, ce('tr', {} [
+				ce('td', {key:1}, '[+]')
+			]))
 		])
 	}
 })
@@ -96,6 +104,9 @@ var Ruin = React.createClass({
 	handlePayChange: function(idx, newval) {
 		this.state.prizetable[idx].pay = newval
 		this.forceUpdate()
+	},
+	handleRemovePay: function(idx) {
+		this.state.prizetable.splice(idx, 1)
 	}
 })
 
