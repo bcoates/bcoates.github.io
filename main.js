@@ -27,7 +27,7 @@ var PayTable = React.createClass({
 				this.props.onPayChange(i, event.target.value)
 			}
 			var remove = event => {
-				this.props.removePay(i)
+				this.props.onRemovePay(i)
 			}
 			return ce('tr', {key: i}, [
 				ce('td', {key:1, onClick: remove}, '[-]'),
