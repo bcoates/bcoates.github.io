@@ -107,6 +107,7 @@ var Ruin = React.createClass({
 	},
 	handleRemovePay: function(idx) {
 		this.state.prizetable.splice(idx, 1)
+		this.forceUpdate()
 	}
 })
 
