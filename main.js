@@ -29,7 +29,7 @@ var PayTable = React.createClass({
 			var remove = event => {
 				this.props.onRemovePay(i)
 			}
-			var reels = this.props.prizetable.symbol.map( (reel, i) => {
+			var reels = pt.symbol.map( (reel, i) => {
 				// todo: lift
 				var fr = flatreel(this.props.reels[i])
 				var reelents = Object.keys(fr).map( (sym, j) => 
