@@ -30,11 +30,11 @@ var PayTable = React.createClass({
 				this.props.onRemovePay(i)
 			}
 			var reels = pt.symbol.map( (reel, i) => {
-				return ce('select', {key: i, value: reel}, [
-					ce('option', {key: 1, value: 'B7'}, 'B7'),
-					ce('option', {key: 2, value: '3B'}, '3B'),
-					ce('option', {key: 3, value: 'DJ'}, 'DJ')
-				]);
+				var fr = flatreel(reel)
+				var reelents = Object.keys(fr).map( (sym, j) => 
+					ce('option', {key: j, value: sym}, sym + ' - ' + fr[sym]) )
+				
+				return ce('select', {key: i, value: reel}, reelents);
 			});
 			return ce('tr', {key: i}, [
 				ce('td', {key:1, onClick: remove}, '[-]'),
@@ -86,6 +86,14 @@ var Return = React.createClass({
 		return ce('div', {}, ['Player Return: ', ret, '%'])
 	}
 })
+
+function flatreel(reelstrip) {
+	var ret = {}
+	reelstrip.forEach( e => {
+		ret[e.sym] = (ret[e.sym] || 0) + e.n
+	})
+	return ret
+}
 
 var Ruin = React.createClass({
 	getInitialState: function() {
