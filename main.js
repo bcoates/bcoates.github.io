@@ -47,6 +47,9 @@ var PayTable = React.createClass({
 				ce('td', {key:4}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
+		var add = event => {
+			this.props.onAddPay()
+		}
 		return ce('table', {}, [
 			ce('thead', {key:1}, ce('tr', {}, [
 				ce('th', {key:1}, ' '),
@@ -56,7 +59,7 @@ var PayTable = React.createClass({
 			])),
 			ce('tbody', {key: 2}, items),
 			ce('tfoot', {key: 3}, ce('tr', {}, [
-				ce('td', {key:1}, '[+]')
+				ce('td', {key:1, onClick: add}, '[+]')
 			]))
 		])
 	}
@@ -111,7 +114,7 @@ var Ruin = React.createClass({
 	},
 	render: function() {
 		return ce('div', {}, [
-			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onReelChange: this.handleReelChange}),
+			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 			ce(SaveBox, {key: 3, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
@@ -130,6 +133,10 @@ var Ruin = React.createClass({
 	},
 	handleRemovePay: function(idx) {
 		this.state.prizetable.splice(idx, 1)
+		this.forceUpdate()
+	},
+	handleAddPay: function(idx) {
+		this.state.prizetable.push( {symbol: ['XX', 'XX', 'XX'], pay: 0} )
 		this.forceUpdate()
 	}
 })
