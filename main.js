@@ -29,13 +29,16 @@ var PayTable = React.createClass({
 			var remove = event => {
 				this.props.onRemovePay(i)
 			}
-			var reels = pt.symbol.map( (reel, i) => {
+			var reels = pt.symbol.map( (reel, j) => {
+				var changeReel = event => {
+					this.props.onReelChange(i, j, event.target.value)
+				}
 				// todo: lift
 				var fr = flatreel(this.props.reels[i])
-				var reelents = Object.keys(fr).map( (sym, j) => 
-					ce('option', {key: j, value: sym}, sym + ' - ' + fr[sym]) )
+				var reelents = Object.keys(fr).map( (sym, k) => 
+					ce('option', {key: k, value: sym}, sym + ' - ' + fr[sym]) )
 				
-				return ce('select', {key: i, value: reel}, reelents);
+				return ce('select', {key: j, value: reel, onChange:changeReel}, reelents);
 			});
 			return ce('tr', {key: i}, [
 				ce('td', {key:1, onClick: remove}, '[-]'),
@@ -108,7 +111,7 @@ var Ruin = React.createClass({
 	},
 	render: function() {
 		return ce('div', {}, [
-			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay}),
+			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 			ce(SaveBox, {key: 3, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
@@ -119,6 +122,10 @@ var Ruin = React.createClass({
 	},
 	handlePayChange: function(idx, newval) {
 		this.state.prizetable[idx].pay = newval
+		this.forceUpdate()
+	},
+	handleReelChange: function(tblIdx, reelIdx, newval) {
+		this.state.prizetable[tblIdx].symbol[reelIdx] = newval
 		this.forceUpdate()
 	},
 	handleRemovePay: function(idx) {
