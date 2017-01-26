@@ -22,25 +22,25 @@ function winners(reels, symbols) {
 
 var PayTable = React.createClass({
 	render: function() {
-		var items = this.props.prizetable.map( (pt,i) => {
+		var items = this.props.prizetable.map( (pt,pt_idx) => {
 			var changePay = event => {
-				this.props.onPayChange(i, event.target.value)
+				this.props.onPayChange(pt_idx, event.target.value)
 			}
 			var remove = event => {
-				this.props.onRemovePay(i)
+				this.props.onRemovePay(pt_idx)
 			}
-			var reels = pt.symbol.map( (reel, j) => {
+			var reels = pt.symbol.map( (reel, reel_idx) => {
 				var changeReel = event => {
-					this.props.onReelChange(i, j, event.target.value)
+					this.props.onReelChange(pt_idx, reel_idx, event.target.value)
 				}
 				// todo: lift
-				var fr = flatreel(this.props.reels[i])
-				var reelents = Object.keys(fr).map( (sym, k) => 
-					ce('option', {key: k, value: sym}, sym + ' - ' + fr[sym]) )
+				var fr = flatreel(this.props.reels[reel_idx])
+				var reelents = Object.keys(fr).map( (sym, sym_idx) => 
+					ce('option', {key: sym_idx, value: sym}, sym + ' - ' + fr[sym]) )
 				
-				return ce('select', {key: j, value: reel, onChange:changeReel}, reelents);
+				return ce('select', {key: reel_idx, value: reel, onChange:changeReel}, reelents);
 			});
-			return ce('tr', {key: i}, [
+			return ce('tr', {key: pt_idx}, [
 				ce('td', {key:1, onClick: remove}, '[-]'),
 				ce('td', {key:2}, reels),
 				ce('td', {key:3}, winners(this.props.reels, pt.symbol)),
