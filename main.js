@@ -131,7 +131,7 @@ var Ruin = React.createClass({
 		return ce('div', {}, [
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
-			ce(ReelStrip, {key: 3, reels: this.state.reel}),
+			ce(ReelStrip, {key: 3, reels: this.state.reels}),
 			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
 	},
