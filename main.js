@@ -128,7 +128,7 @@ var Ruin = React.createClass({
 		return {prizetable: [
 			{ symbol: ['B7', 'B7', 'DJ'], pay: 5000 },
 			{ symbol: ['3B', '3B', '3B'], pay: 120 }],
-			reels: [ [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
+			reels: [ [ {sym:'B7', n: 1}, {sym: 'BL', n: 4}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym: '3B', n: 3}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4}, {sym: 'BL', n: 3}, {sym: '1B', n: 6}, {sym: 'BL', n: 3}, {sym: 'B7', n: 1}, {sym: 'BL', n: 3}, {sym: '2B', n: 5}, {sym: 'BL', n: 3}, {sym: '1B', n: 5}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4}, {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym:'3B', n: 3}, {sym: 'BL', n: 3} ],
 				 [ {sym:'B7', n: 2}, {sym:'3B', n: 6}, {sym: 'BL', n: 64} ],
 				 [ {sym:'DJ', n: 1}, {sym:'3B', n: 3}, {sym: 'BL', n: 67} ]
 			] }
