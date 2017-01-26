@@ -74,7 +74,7 @@ var ReelStrip = React.createClass({
 					ce('input', {key: 2, type: 'number', value: 42})
 				])
 			})
-			return ce('span', {key: reel_idx}, stops)
+			return ce('div', {key: reel_idx, style: {display: 'inline-block'}, stops)
 		})
 		return ce('div', {}, strips)
 	}
