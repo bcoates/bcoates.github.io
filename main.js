@@ -65,6 +65,21 @@ var PayTable = React.createClass({
 	}
 })
 
+var ReelStrip = React.createClass({
+	render: function() {
+		var strips = this.props.reels.map( (reel, reel_idx) => {
+			var stops = reel.map( (stop, stop_idx) => {
+				return ce('div', {key: stop_idx}, [
+					ce('select', {key: 1}, [ ce('option', {key:1, value:'o'}, 'standin'} ]),
+					ce('input', {key: 2, type: 'number', value: 42})
+				])
+			})
+			return ce('span', {key: reel_idx}, stops)
+		})
+		return ce('div', {}, strips)
+	}
+})
+
 var SaveBox = React.createClass({
 	getInitialState: function() {
 		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels}, 2)}
@@ -116,7 +131,8 @@ var Ruin = React.createClass({
 		return ce('div', {}, [
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
-			ce(SaveBox, {key: 3, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
+			ce(ReelStrip, {key: 3, reels: this.state.reel}),
+			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
 	},
 	handleState: function(newstate) {
