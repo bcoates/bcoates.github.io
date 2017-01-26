@@ -70,8 +70,8 @@ var ReelStrip = React.createClass({
 		var strips = this.props.reels.map( (reel, reel_idx) => {
 			var stops = reel.map( (stop, stop_idx) => {
 				return ce('div', {key: stop_idx}, [
-					ce('input', {key: 1, value: 'XX', style: {width: '4em'}}),
-					ce('input', {key: 2, type: 'number', value: 42, style: {width: '4em'}})
+					ce('input', {key: 1, value: stop.sym, style: {width: '4em'}}),
+					ce('input', {key: 2, type: 'number', value: stop.n, style: {width: '4em'}})
 				])
 			})
 			return ce('div', {key: reel_idx, style: {display: 'inline-block'}}, stops)
