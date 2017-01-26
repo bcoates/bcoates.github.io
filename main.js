@@ -24,7 +24,7 @@ var PayTable = React.createClass({
 	render: function() {
 		var items = this.props.prizetable.map( (pt,pt_idx) => {
 			var changePay = event => {
-				this.props.onPayChange(pt_idx, event.target.value)
+				this.props.onPayChange(pt_idx, ~~event.target.value)
 			}
 			var remove = event => {
 				this.props.onRemovePay(pt_idx)
@@ -73,7 +73,7 @@ var ReelStrip = React.createClass({
 					this.props.onSymChange(reel_idx, stop_idx, event.target.value)
 				}
 				changeN = event => {
-					this.props.onStopNChange(reel_idx, stop_idx, event.target.value)
+					this.props.onStopNChange(reel_idx, stop_idx, ~~event.target.value)
 				}
 				return ce('div', {key: stop_idx}, [
 					ce('input', {key: 1, value: stop.sym, onChange:changeSym, style: {width: '4em'}}),
