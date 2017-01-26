@@ -80,7 +80,7 @@ var SaveBox = React.createClass({
 			} catch (e) {
 			}
 		}
-		return ce('textarea', {defaultValue: this.state.txt, onChange: change, width: '20em', height: '8em'})
+		return ce('textarea', {value: this.state.txt, onChange: change, style: {width: '20em', height: '8em'}})
 	}
 })
 
