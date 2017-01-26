@@ -136,7 +136,7 @@ var Ruin = React.createClass({
 		this.forceUpdate()
 	},
 	handleAddPay: function(idx) {
-		this.state.prizetable.push( {symbol: ['XX', 'XX', 'XX'], pay: 0} )
+		this.state.prizetable.push( {symbol: ['BL', 'BL', 'BL'], pay: 0} )
 		this.forceUpdate()
 	}
 })
