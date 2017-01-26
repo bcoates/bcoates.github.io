@@ -69,9 +69,15 @@ var ReelStrip = React.createClass({
 	render: function() {
 		var strips = this.props.reels.map( (reel, reel_idx) => {
 			var stops = reel.map( (stop, stop_idx) => {
+				changeSym = event => {
+					this.props.onSymChange(reel_idx, stop_idx, event.target.value)
+				}
+				changeN = event => {
+					this.props.onStopNChange(reel_idx, stop_idx, event.target.value)
+				}
 				return ce('div', {key: stop_idx}, [
-					ce('input', {key: 1, value: stop.sym, style: {width: '4em'}}),
-					ce('input', {key: 2, type: 'number', value: stop.n, style: {width: '4em'}})
+					ce('input', {key: 1, value: stop.sym, onChange:changeSym, style: {width: '4em'}}),
+					ce('input', {key: 2, type: 'number', value: stop.n, onChange:changeN, style: {width: '4em'}})
 				])
 			})
 			return ce('div', {key: reel_idx, style: {display: 'inline-block'}}, stops)
@@ -131,9 +137,17 @@ var Ruin = React.createClass({
 		return ce('div', {}, [
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
-			ce(ReelStrip, {key: 3, reels: this.state.reels}),
+			ce(ReelStrip, {key: 3, reels: this.state.reels, onSymChange: this.handleSymChange, onStopNChange: this.handleStopNChange}),
 			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
 		])
+	},
+	handleSymChange: function(reel_idx, stop_idx, newsym) {
+		this.state.reels[reel_idx][stop_idx].sym = newsym
+		this.forceUpdate()
+	},
+	handleStopNChange: function(reel_idx, stop_idx, newn) {
+		this.state.reels[reel_idx][stop_idx].n = newn
+		this.forceUpdate()
 	},
 	handleState: function(newstate) {
 		this.state = newstate
