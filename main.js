@@ -70,7 +70,7 @@ var ReelStrip = React.createClass({
 		var strips = this.props.reels.map( (reel, reel_idx) => {
 			var stops = reel.map( (stop, stop_idx) => {
 				return ce('div', {key: stop_idx}, [
-					ce('select', {key: 1}, [ ce('option', {key:1, value:'o'}, 'standin'} ]),
+					ce('select', {key: 1}, [ ce('option', {key:1, value:'o'}, 'standin') ]),
 					ce('input', {key: 2, type: 'number', value: 42})
 				])
 			})
