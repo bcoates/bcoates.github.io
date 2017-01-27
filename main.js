@@ -114,7 +114,7 @@ var SaveBox = React.createClass({
 var Return = React.createClass({
 	render: function() {
 		ret = (this.props.prizetable.reduce( (acc, cur) => {
-			return acc + cur.pay * winners(this.props.reels, cur.symbol, this.propos.wildcards)
+			return acc + cur.pay * winners(this.props.reels, cur.symbol, this.props.wildcards)
 		}, 0) * 100 / possible(this.props.reels)).toFixed(2)
 		
 		return ce('div', {}, ['Player Return: ', ret, '%'])
