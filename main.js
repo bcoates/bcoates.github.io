@@ -16,7 +16,7 @@ function possible(reels, pred = (reelidx, sym) => true ) {
 	return Π(reels, (r, reelidx) => Σ(r, s => pred(reelidx, s.sym) ? s.n : 0))
 }
 
-function winners(reels, symbols, wildcards = {}) {
+function winners(reels, symbols, wildcards) {
 	return possible(reels, (reelidx, sym) => {
 		if (symbols[reelidx] in wildcards) {
 			return wildcards[symbols[reelidx]].includes(sym)
@@ -49,7 +49,7 @@ var PayTable = React.createClass({
 			return ce('tr', {key: pt_idx}, [
 				ce('td', {key:1, onClick: remove}, '[-]'),
 				ce('td', {key:2}, reels),
-				ce('td', {key:3}, winners(this.props.reels, pt.symbol)),
+				ce('td', {key:3}, winners(this.props.reels, pt.symbol, this.props.wildcards)),
 				ce('td', {key:4}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
@@ -114,7 +114,7 @@ var SaveBox = React.createClass({
 var Return = React.createClass({
 	render: function() {
 		ret = (this.props.prizetable.reduce( (acc, cur) => {
-			return acc + cur.pay * winners(this.props.reels, cur.symbol)
+			return acc + cur.pay * winners(this.props.reels, cur.symbol, this.propos.wildcards)
 		}, 0) * 100 / possible(this.props.reels)).toFixed(2)
 		
 		return ce('div', {}, ['Player Return: ', ret, '%'])
@@ -149,7 +149,7 @@ var Ruin = React.createClass({
 	render: function() {
 		return ce('div', {}, [
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, wildcards: this.state.wildcards, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
-			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
+			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels, wildcards: this.state.wildcards,}),
 			ce(ReelStrip, {key: 3, reels: this.state.reels, onSymChange: this.handleSymChange, onStopNChange: this.handleStopNChange}),
 			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, wildcards: this.state.wildcards, onChange: this.handleState})
 		])
