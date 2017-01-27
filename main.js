@@ -120,7 +120,7 @@ function flatreel(reelstrip, wildcards) {
 	reelstrip.forEach( e => {
 		ret[e.sym] = (ret[e.sym] || 0) + e.n
 	})
-	wildcards.entries.foreach( [pattern, symbols] => {
+	wildcards.entries.foreach( ([pattern, symbols]) => {
 		ret[pattern] = (ret[pattern] || 0) + Σ(symbols, sym => ret[sym])
 	})
 	return ret
