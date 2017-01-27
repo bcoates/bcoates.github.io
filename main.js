@@ -126,7 +126,7 @@ function flatreel(reelstrip) {
 var Ruin = React.createClass({
 	getInitialState: function() {
 		return {prizetable: [
-			{ symbol: ['B7', 'B7', 'DJ'], pay: 5000 },
+			{ symbol: ['B7', 'B7', 'DJ'], pay: 5000/3 },
 			{ symbol: ['3B', '3B', '3B'], pay: 120 }],
 			reels: [ [ {sym:'B7', n: 1}, {sym: 'BL', n: 4}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym: '3B', n: 3}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4},  {sym: 'BL', n: 3}, {sym: '1B', n: 6}, {sym: 'BL', n: 3}, {sym: 'B7', n: 1}, {sym: 'BL', n: 3}, {sym: '2B', n: 5}, {sym: 'BL', n: 3}, {sym: '1B', n: 5}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4},  {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym:'3B', n: 3}, {sym: 'BL', n: 3} ],
 				 [ {sym:'B7', n: 2}, {sym: 'BL', n: 4}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym: '3B', n: 3}, {sym: 'BL', n: 3}, {sym: '2B', n: 2},  {sym: 'BL', n: 3}, {sym: '1B', n: 6}, {sym: 'BL', n: 3}, {sym: 'R7', n: 3}, {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: 'BL', n: 3}, {sym: '1B', n: 5}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4},  {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym:'3B', n: 3}, {sym: 'BL', n: 4} ],
