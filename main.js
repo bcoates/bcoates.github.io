@@ -115,10 +115,13 @@ var Return = React.createClass({
 	}
 })
 
-function flatreel(reelstrip) {
+function flatreel(reelstrip, wildcards) {
 	var ret = {}
 	reelstrip.forEach( e => {
 		ret[e.sym] = (ret[e.sym] || 0) + e.n
+	})
+	wildcards.entries.foreach( [pattern, symbols] => {
+		ret[pattern] = (ret[pattern] || 0) + Σ(symbols, sym => ret[sym])
 	})
 	return ret
 }
@@ -131,6 +134,7 @@ var Ruin = React.createClass({
 			{ symbol: ['R7', 'R7', 'DJ'], pay: 600/3 },
 			{ symbol: ['R7', 'R7', 'R7'], pay: 300/3 },
 			{ symbol: ['A7', 'A7', 'DJ'], pay: 400/3 },],
+			wildcards: { 'A7': ['R7', 'B7'] },
 			reels: [ [ {sym:'B7', n: 1}, {sym: 'BL', n: 4}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym: '3B', n: 3}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4},  {sym: 'BL', n: 3}, {sym: '1B', n: 6}, {sym: 'BL', n: 3}, {sym: 'B7', n: 1}, {sym: 'BL', n: 3}, {sym: '2B', n: 5}, {sym: 'BL', n: 3}, {sym: '1B', n: 5}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4},  {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym:'3B', n: 3}, {sym: 'BL', n: 3} ],
 				 [ {sym:'B7', n: 2}, {sym: 'BL', n: 4}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym: '3B', n: 3}, {sym: 'BL', n: 3}, {sym: '2B', n: 2},  {sym: 'BL', n: 3}, {sym: '1B', n: 6}, {sym: 'BL', n: 3}, {sym: 'R7', n: 3}, {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: 'BL', n: 3}, {sym: '1B', n: 5}, {sym: 'BL', n: 3}, {sym: 'R7', n: 4},  {sym: 'BL', n: 3}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym:'3B', n: 3}, {sym: 'BL', n: 4} ],
 				 [ {sym:'DJ', n: 1}, {sym: 'BL', n: 4}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym: '3B', n: 2}, {sym: 'BL', n: 3}, {sym: 'B7', n: 11}, {sym: 'BL', n: 3}, {sym: '1B', n: 1}, {sym: 'BL', n: 2}, {sym: 'R7', n: 6}, {sym: 'BL', n: 2}, {sym: '1B', n: 1}, {sym: 'BL', n: 2}, {sym: '1B', n: 1}, {sym: 'BL', n: 2}, {sym: 'B7', n: 12}, {sym: 'BL', n: 2}, {sym: '2B', n: 3}, {sym: '1B', n: 3}, {sym:'3B', n: 1}, {sym: 'BL', n: 4} ]
