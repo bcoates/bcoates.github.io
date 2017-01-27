@@ -21,7 +21,7 @@ function winners(reels, symbols, wildcards = {}) {
 		if (symbols[reelidx] in wildcards) {
 			return wildcards[symbols[reelidx]].includes(sym)
 		} else {
-			symbols[reelidx] == sym
+			return symbols[reelidx] == sym
 		}
 	})
 }
