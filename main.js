@@ -34,7 +34,7 @@ var PayTable = React.createClass({
 					this.props.onReelChange(pt_idx, reel_idx, event.target.value)
 				}
 				// todo: lift
-				var fr = flatreel(this.props.reels[reel_idx])
+				var fr = flatreel(this.props.reels[reel_idx],this.props.wildcards)
 				var reelents = Object.keys(fr).map( (sym, sym_idx) => 
 					ce('option', {key: sym_idx, value: sym}, sym + ' - ' + fr[sym]) )
 				
@@ -142,7 +142,7 @@ var Ruin = React.createClass({
 	},
 	render: function() {
 		return ce('div', {}, [
-			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
+			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, wildcards: this.state.wildcards, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 			ce(ReelStrip, {key: 3, reels: this.state.reels, onSymChange: this.handleSymChange, onStopNChange: this.handleStopNChange}),
 			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
