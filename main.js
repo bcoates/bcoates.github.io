@@ -16,8 +16,8 @@ function possible(reels, pred = (reelidx, sym) => true ) {
 	return Π(reels, (r, reelidx) => Σ(r, s => pred(reelidx, s.sym) ? s.n : 0))
 }
 
-function winners(reels, symbols) {
-	return possible(reels, (reelidx, sym) => symbols[reelidx] == sym)
+function winners(reels, symbols, wildcards) {
+	return possible(reels, (reelidx, sym) => symbols[reelidx] == sym || wildcards[symbols[reelidx]].includes(sym) )
 }
 
 var PayTable = React.createClass({
@@ -88,10 +88,10 @@ var ReelStrip = React.createClass({
 
 var SaveBox = React.createClass({
 	getInitialState: function() {
-		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels}, 2)}
+		return {txt: JSON.stringify({prizetable: this.props.prizetable, reels: this.props.reels, wildcards: this.props.wildcards}, 2)}
 	},
 	componentWillReceiveProps: function(nextProps) {
-		this.setState({txt: JSON.stringify({prizetable: nextProps.prizetable, reels: nextProps.reels}, 2)})
+		this.setState({txt: JSON.stringify({prizetable: nextProps.prizetable, reels: nextProps.reels, wildcards: nextProps.wildcards}, 2)})
 	},
 	render: function() {
 		var change = event => {
@@ -145,7 +145,7 @@ var Ruin = React.createClass({
 			ce(PayTable, {key: 1, prizetable: this.state.prizetable, reels: this.state.reels, wildcards: this.state.wildcards, onPayChange: this.handlePayChange, onRemovePay: this.handleRemovePay, onAddPay: this.handleAddPay, onReelChange: this.handleReelChange}),
 			ce(Return, {key: 2, prizetable: this.state.prizetable, reels: this.state.reels}),
 			ce(ReelStrip, {key: 3, reels: this.state.reels, onSymChange: this.handleSymChange, onStopNChange: this.handleStopNChange}),
-			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, onChange: this.handleState})
+			ce(SaveBox, {key: 4, prizetable: this.state.prizetable, reels: this.state.reels, wildcards: this.state.wildcards, onChange: this.handleState})
 		])
 	},
 	handleSymChange: function(reel_idx, stop_idx, newsym) {
