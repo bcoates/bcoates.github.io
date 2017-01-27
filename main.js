@@ -16,8 +16,14 @@ function possible(reels, pred = (reelidx, sym) => true ) {
 	return Π(reels, (r, reelidx) => Σ(r, s => pred(reelidx, s.sym) ? s.n : 0))
 }
 
-function winners(reels, symbols, wildcards) {
-	return possible(reels, (reelidx, sym) => symbols[reelidx] == sym || wildcards[symbols[reelidx]].includes(sym) )
+function winners(reels, symbols, wildcards = {}) {
+	return possible(reels, (reelidx, sym) => {
+		if (symbols[reelidx] in wildcards) {
+			return wildcards[symbols[reelidx]].includes(sym)
+		} else {
+			symbols[reelidx] == sym
+		}
+	})
 }
 
 var PayTable = React.createClass({
