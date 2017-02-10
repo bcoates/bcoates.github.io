@@ -16,7 +16,7 @@ function possible(reels, pred = (reelidx, sym) => true ) {
 	return Π(reels, (r, reelidx) => Σ(r, s => pred(reelidx, s.sym) ? s.n : 0))
 }
 
-function winners(reels, symbols, wildcards) {
+function raw_winners(reels, symbols, wildcards) {
 	return possible(reels, (reelidx, sym) => {
 		if (symbols[reelidx] in wildcards) {
 			return wildcards[symbols[reelidx]].includes(sym)
@@ -24,6 +24,14 @@ function winners(reels, symbols, wildcards) {
 			return symbols[reelidx] == sym
 		}
 	})
+}
+
+function blocked_winners(reels, symbols, wildcards) {
+	
+}
+
+function winners(reels, symbols, wildcards) {
+	return raw_winners(reels, symbols, wildcards) - blocked_winners(reels, symbols, wildcards)
 }
 
 var PayTable = React.createClass({
@@ -49,8 +57,10 @@ var PayTable = React.createClass({
 			return ce('tr', {key: pt_idx}, [
 				ce('td', {key:1, onClick: remove}, '[-]'),
 				ce('td', {key:2}, reels),
-				ce('td', {key:3}, winners(this.props.reels, pt.symbol, this.props.wildcards)),
-				ce('td', {key:4}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
+				ce('td', {key:3}, raw_winners(this.props.reels, pt.symbol, this.props.wildcards)),
+				ce('td', {key:4}, blocked_winners(this.props.reels, pt.symbol, this.props.wildcards)),
+				ce('td', {key:5}, winners(this.props.reels, pt.symbol, this.props.wildcards))
+				ce('td', {key:6}, ce('input', {type:'number', value:pt.pay, onChange:changePay}))
 			])
 		});
 		var add = event => {
@@ -61,7 +71,9 @@ var PayTable = React.createClass({
 				ce('th', {key:1}, ' '),
 				ce('th', {key:2}, 'symbols'),
 				ce('th', {key:3}, 'hits'),
-				ce('th', {key:4}, 'pays'),
+				ce('th', {key:4}, 'minus'),
+				ce('th', {key:5}, 'actual'),
+				ce('th', {key:6}, 'pays')
 			])),
 			ce('tbody', {key: 2}, items),
 			ce('tfoot', {key: 3}, ce('tr', {}, [
